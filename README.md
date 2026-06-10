@@ -20,6 +20,7 @@ This project uses a Convolutional Neural Network (CNN) to detect diseases in tom
 - PIL
 
 ## Run Locally
+## Model file is not included due to GitHub file size limitations.
 
 ```bash
 pip install -r requirements.txt
