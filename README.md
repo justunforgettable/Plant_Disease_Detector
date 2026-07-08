@@ -17,7 +17,7 @@ This project uses a Convolutional Neural Network (CNN) to detect diseases in tom
 - TensorFlow
 - Streamlit
 - NumPy
-- Pil
+- PIL
 
 ## Run Locally
 ## Model file is not included due to GitHub file size limitations.
