@@ -6,6 +6,7 @@ from PIL import Image
 import json
 import cv2
 import os
+import urllib.request
 
 # ────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -18,6 +19,23 @@ st.set_page_config(
 
 IMG_SIZE = 128
 LAST_CONV_LAYER = "conv2d_2"   # same layer name used in your Colab notebook
+
+# ────────────────────────────────────────────────────────────
+# HUGGING FACE MODEL URLS — replace YOUR_USERNAME below
+# ────────────────────────────────────────────────────────────
+HF_USERNAME = "justunforgettable"         
+HF_REPO = "Plant_Disease_Detector"       
+
+MODEL_URL = f"https://huggingface.co/{HF_USERNAME}/{HF_REPO}/resolve/main/plant_disease_model.h5"
+CLASS_INDICES_URL = f"https://huggingface.co/{HF_USERNAME}/{HF_REPO}/resolve/main/class_indices.json"
+
+MODEL_PATH = "plant_disease_model.h5"
+CLASS_INDICES_PATH = "class_indices.json"
+
+def download_if_missing(url, path):
+    if not os.path.exists(path):
+        with st.spinner(f"Downloading {path} (first time only)..."):
+            urllib.request.urlretrieve(url, path)
 
 # ────────────────────────────────────────────────────────────
 # DISEASE INFO (fixed: Leaf_Mold instead of Leaf_Miner bug)
@@ -65,8 +83,11 @@ DISEASE_INFO = {
 # ────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model_and_classes():
-    model = keras.models.load_model("plant_disease_model.h5")
-    with open("class_indices.json", "r") as f:
+    download_if_missing(MODEL_URL, MODEL_PATH)
+    download_if_missing(CLASS_INDICES_URL, CLASS_INDICES_PATH)
+
+    model = keras.models.load_model(MODEL_PATH)
+    with open(CLASS_INDICES_PATH, "r") as f:
         index_to_class = json.load(f)   # {"0": "Tomato_Early_blight", ...}
     # Build once so Grad-CAM graph works properly (important for Sequential models)
     dummy = np.zeros((1, IMG_SIZE, IMG_SIZE, 3), dtype=np.float32)
