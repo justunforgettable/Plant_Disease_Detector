@@ -183,49 +183,22 @@ unsafe_allow_html=True)
 
 with st.sidebar:
 
-    st.markdown(
-        "## 🍅 Plant AI"
-    )
+    st.title("🍅 Plant AI")
 
-    st.markdown(
+    st.write(
     """
-    <div class="feature-card">
+    **Deep Learning Plant Disease Detector**
 
-    🌱 AI Disease Detection
+    Dataset:
+    PlantVillage
 
-    <br><br>
+    Model:
+    CNN
 
-    📊 Confidence Analysis
-
-    <br><br>
-
-    💊 Treatment Guide
-
-    <br><br>
-
-    🛡 Prevention Tips
-
-    </div>
-    """,
-    unsafe_allow_html=True
+    Framework:
+    TensorFlow
+    """
     )
-
-
-    st.markdown("---")
-
-
-    st.write(
-        "🚀 Powered By"
-    )
-
-    st.write(
-        """
-        - TensorFlow CNN
-        - Streamlit
-        - PlantVillage Dataset
-        """
-    )
-
 
 
 # ============================================================
@@ -562,108 +535,85 @@ def predict_disease(image):
         prediction[0]
     )
 
-
-
 # ============================================================
-# HERO SECTION
+# COMPACT HEADER
 # ============================================================
 
-st.markdown(
-"""
-<div class="hero">
+st.markdown("""
+<div class="hero-small">
 
-<h1>
-🍅 Tomato Leaf Disease Detector
-</h1>
-
-
-<h3>
-AI Powered Plant Health Analysis
-</h3>
-
+<h1>🍅 Plant AI</h1>
 
 <p>
-Detect diseases instantly using Deep Learning
-and get treatment recommendations.
+Tomato Leaf Disease Detection using Deep Learning
 </p>
-
 
 </div>
 """,
-unsafe_allow_html=True
-)
+unsafe_allow_html=True)
 
 
 
-# ============================================================
-# FEATURES ROW
-# ============================================================
+st.markdown("""
+<style>
 
-f1,f2,f3 = st.columns(3)
+.hero-small {
 
+background:
+linear-gradient(
+135deg,
+#ec407a,
+#43a047
+);
 
-with f1:
+padding:20px;
 
-    st.markdown(
-    """
-    <div class="feature-card">
+border-radius:20px;
 
-    🔍
+color:white;
 
-    <h4>
-    Disease Detection
-    </h4>
+text-align:center;
 
-    AI based classification
+margin-bottom:25px;
 
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+box-shadow:
+0 8px 25px rgba(0,0,0,0.15);
 
-
-with f2:
-
-    st.markdown(
-    """
-    <div class="feature-card">
-
-    📊
-
-    <h4>
-    Confidence Score
-    </h4>
-
-    Prediction probability
-
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+}
 
 
-with f3:
+.result-card {
 
-    st.markdown(
-    """
-    <div class="feature-card">
+background:
+rgba(255,255,255,0.55);
 
-    🌱
+backdrop-filter:
+blur(15px);
 
-    <h4>
-    Plant Care
-    </h4>
+padding:30px;
 
-    Treatment guidance
+border-radius:25px;
 
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+box-shadow:
+0 10px 30px rgba(0,0,0,0.15);
+
+}
 
 
-st.write("")
+.confidence {
 
+font-size:35px;
+
+font-weight:700;
+
+color:#2e7d32;
+
+}
+
+
+</style>
+""",
+unsafe_allow_html=True)
 
 
 # ============================================================
@@ -727,62 +677,58 @@ if uploaded_file:
 
 
 
-    with right:
+with right:
+
+    st.markdown(
+    f"""
+
+    <div class="result-card">
+
+    <h1>
+    🩺 {info.get("display_name", disease)}
+    </h1>
 
 
-        st.markdown(
-        f"""
-        <div class="glass-card">
-
-        <h2>
-        🩺
-        {info.get(
-            "display_name",
-            disease
-        )}
-        </h2>
+    <p class="confidence">
+    {confidence:.2f}%
+    </p>
 
 
-        <h3>
-        🎯 Confidence:
-        {confidence:.2f}%
-        </h3>
+    <h3>
+    Model Confidence
+    </h3>
 
 
-        </div>
-        """,
-        unsafe_allow_html=True
+    </div>
+
+    """,
+    unsafe_allow_html=True
+    )
+
+
+    severity = info.get(
+        "severity",
+        "Unknown"
+    )
+
+
+    if severity == "High":
+
+        st.error(
+            "🚨 High Severity - Immediate Action Required"
         )
 
+    elif severity == "Moderate":
 
-
-        severity = info.get(
-            "severity",
-            "Unknown"
+        st.warning(
+            "⚠️ Moderate Severity"
         )
 
+    else:
 
-        if severity=="High":
-
-            st.error(
-                f"🚨 Severity: {severity}"
-            )
-
-
-        elif severity=="Moderate":
-
-            st.warning(
-                f"⚠️ Severity: {severity}"
-            )
-
-
-        else:
-
-            st.success(
-                f"✅ Severity: {severity}"
-            )
-
-
+        st.success(
+            "✅ Healthy Plant"
+        )
 
 
 # ============================================================
