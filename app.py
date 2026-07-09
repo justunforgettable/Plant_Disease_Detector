@@ -26,8 +26,8 @@ LAST_CONV_LAYER = "conv2d_2"   # same layer name used in your Colab notebook
 HF_USERNAME = "justunforgettable"         
 HF_REPO = "Plant_Disease_Detector"       
 
-MODEL_URL = f"https://huggingface.co/{HF_USERNAME}/{HF_REPO}/resolve/main/plant_disease_model.h5"
-CLASS_INDICES_URL = f"https://huggingface.co/{HF_USERNAME}/{HF_REPO}/resolve/main/class_indices.json"
+MODEL_URL = f"co/justunforgettable/Plant_Disease_Detector/resolve/main/plant_disease_model.h5"
+CLASS_INDICES_URL = f"https://huggingface.co/justunforgettable/Plant_Disease_Detector/resolve/main/class_indices.json"
 
 MODEL_PATH = "plant_disease_model.h5"
 CLASS_INDICES_PATH = "class_indices.json"
