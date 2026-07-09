@@ -272,169 +272,59 @@ def download_if_missing(url,path):
 
 
 
-# ============================================================
-# DISEASE INFORMATION
-# ============================================================
-
-DISEASE_INFO = {
-
-
-"Tomato_healthy":
-
-{
-
-"display_name":
-"Healthy Tomato 🍃",
-
-"description":
-"The plant looks healthy without visible disease symptoms.",
-
-"first_aid":
-"No treatment required. Continue proper plant care.",
-
-"prevention":
-"Maintain sunlight, watering and nutrition.",
-
-"severity":
-"None"
-
-},
-
-
-
-"Tomato_Early_blight":
-
-{
-
-"display_name":
-"Early Blight 🍂",
-
-"description":
-"Fungal disease causing dark spots with yellow rings.",
-
-"first_aid":
-"""
-• Remove infected leaves
-
-• Apply copper fungicide
-
-• Avoid overhead watering
-""",
-
-"prevention":
-"""
-• Crop rotation
-
-• Proper airflow
-
-• Resistant varieties
-""",
-
-"severity":
-"Moderate"
-
-},
-
-
-
-"Tomato_Late_blight":
-
-{
-
-"display_name":
-"Late Blight ⚠️",
-
-"description":
-"Fast spreading disease causing water soaked lesions.",
-
-"first_aid":
-"""
-• Remove infected parts
-
-• Apply suitable fungicide
-
-• Improve drainage
-""",
-
-"prevention":
-"""
-• Use healthy seeds
-
-• Avoid excess moisture
-""",
-
-"severity":
-"High"
-
-},
-
-
-
-"Tomato_Leaf_Mold":
-
-{
-
-"display_name":
-"Leaf Mold 🍃",
-
-"description":
-"Fungal infection common in humid conditions.",
-
-"first_aid":
-"""
-• Remove affected leaves
-
-• Improve ventilation
-
-• Apply fungicide
-""",
-
-"prevention":
-"""
-• Reduce humidity
-
-• Maintain plant spacing
-""",
-
-"severity":
-"Moderate"
-
-},
-
-
-
-"Tomato_Septoria_leaf_spot":
-
-{
-
-"display_name":
-"Septoria Leaf Spot 🍁",
-
-"description":
-"Small circular spots with dark borders.",
-
-"first_aid":
-"""
-• Remove infected leaves
-
-• Apply fungicide
-
-• Avoid wet foliage
-""",
-
-"prevention":
-"""
-• Crop rotation
-
-• Proper irrigation
-""",
-
-"severity":
-"Moderate"
-
-}
-
-}
+# -------------------------------
+# Disease Information
+# -------------------------------
+
+st.divider()
+
+
+tab1, tab2, tab3 = st.tabs(
+    [
+        "📖 Description",
+        "💊 Treatment",
+        "🛡 Prevention"
+    ]
+)
+
+
+with tab1:
+
+    st.markdown(
+        f"""
+        <div class="info-text">
+        <h3>📖 Disease Description</h3>
+        {info.get("description", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+with tab2:
+
+    st.markdown(
+        f"""
+        <div class="info-text">
+        <h3>💊 Recommended Treatment</h3>
+        {info.get("first_aid", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+with tab3:
+
+    st.markdown(
+        f"""
+        <div class="info-text">
+        <h3>🛡 Prevention Methods</h3>
+        {info.get("prevention", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 # ============================================================
 # LOAD MODEL + CLASS INDEX
 # ============================================================
