@@ -169,6 +169,20 @@ footer {
 visibility:hidden;
 }
 
+/* Information section styling */
+
+.stTabs [data-baseweb="tab"] {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.info-text {
+    font-size: 17px;
+    line-height: 1.7;
+    padding: 10px;
+}
+
 
 </style>
 
@@ -748,32 +762,38 @@ if uploaded_file:
 
     with tab1:
 
-        st.info(
-            info.get(
-                "description",
-                "-"
-            )
-        )
+    st.markdown(
+        f"""
+        <div class="info-text">
+        {info.get("description", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
-    with tab2:
+with tab2:
 
-        st.warning(
-            info.get(
-                "first_aid",
-                "-"
-            )
-        )
+    st.markdown(
+        f"""
+        <div class="info-text">
+        {info.get("first_aid", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
-    with tab3:
+with tab3:
 
-        st.success(
-            info.get(
-                "prevention",
-                "-"
-            )
-        )
+    st.markdown(
+        f"""
+        <div class="info-text">
+        {info.get("prevention", "-")}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 
