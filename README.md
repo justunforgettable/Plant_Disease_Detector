@@ -22,6 +22,9 @@ This project uses a Convolutional Neural Network (CNN) to detect diseases in tom
 ## Run Locally
 ## Model file is not included due to GitHub file size limitations.
 
+still working on ui
+
+
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
