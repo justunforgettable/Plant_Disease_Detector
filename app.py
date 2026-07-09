@@ -642,13 +642,11 @@ with left:
     )
 
 
-
 # ============================================================
 # RESULT SECTION
 # ============================================================
 
 if uploaded_file:
-
 
     image = Image.open(
         uploaded_file
@@ -664,8 +662,7 @@ if uploaded_file:
         )
 
 
-
-    disease,confidence,probabilities = predict_disease(
+    disease, confidence, probabilities = predict_disease(
         image
     )
 
@@ -676,67 +673,71 @@ if uploaded_file:
     )
 
 
+    # -------------------------------
+    # Prediction Card
+    # -------------------------------
 
-with right:
+    with right:
 
-    st.markdown(
-    f"""
+        st.markdown(
+        f"""
+        <div class="result-card">
 
-    <div class="result-card">
-
-    <h1>
-    🩺 {info.get("display_name", disease)}
-    </h1>
-
-
-    <p class="confidence">
-    {confidence:.2f}%
-    </p>
+        <h2>
+        🩺 {info.get("display_name", disease)}
+        </h2>
 
 
-    <h3>
-    Model Confidence
-    </h3>
+        <p class="confidence">
+        {confidence:.2f}%
+        </p>
 
 
-    </div>
-
-    """,
-    unsafe_allow_html=True
-    )
+        <h4>
+        Model Confidence
+        </h4>
 
 
-    severity = info.get(
-        "severity",
-        "Unknown"
-    )
-
-
-    if severity == "High":
-
-        st.error(
-            "🚨 High Severity - Immediate Action Required"
-        )
-
-    elif severity == "Moderate":
-
-        st.warning(
-            "⚠️ Moderate Severity"
-        )
-
-    else:
-
-        st.success(
-            "✅ Healthy Plant"
+        </div>
+        """,
+        unsafe_allow_html=True
         )
 
 
-# ============================================================
-# INFORMATION TABS
-# ============================================================
+        severity = info.get(
+            "severity",
+            "Unknown"
+        )
 
 
-    tab1,tab2,tab3 = st.tabs(
+        if severity == "High":
+
+            st.error(
+                "🚨 High Severity - Immediate Action Required"
+            )
+
+        elif severity == "Moderate":
+
+            st.warning(
+                "⚠️ Moderate Severity"
+            )
+
+        else:
+
+            st.success(
+                "✅ Healthy Plant"
+            )
+
+
+
+    # -------------------------------
+    # Disease Information
+    # -------------------------------
+
+    st.divider()
+
+
+    tab1, tab2, tab3 = st.tabs(
         [
             "📖 Description",
             "💊 Treatment",
@@ -776,10 +777,9 @@ with right:
 
 
 
-# ============================================================
-# CONFIDENCE CHART
-# ============================================================
-
+    # -------------------------------
+    # Confidence Chart
+    # -------------------------------
 
     st.divider()
 
@@ -789,25 +789,19 @@ with right:
     )
 
 
-
     df = pd.DataFrame(
 
         {
+            "Disease": short_names,
 
-        "Disease":
-            short_names,
-
-
-        "Confidence":
+            "Confidence":
             [
                 round(float(x)*100,2)
                 for x in probabilities
             ]
-
         }
 
     )
-
 
 
     fig = px.bar(
@@ -827,7 +821,6 @@ with right:
     )
 
 
-
     fig.update_traces(
 
         texttemplate="%{text}%",
@@ -841,7 +834,9 @@ with right:
 
         yaxis_title="Confidence (%)",
 
-        xaxis_title="Disease"
+        xaxis_title="Disease Classes",
+
+        height=450
 
     )
 
@@ -852,23 +847,21 @@ with right:
     )
 
 
-
 else:
-
 
     st.markdown(
     """
     <div class="glass-card"
     style="text-align:center">
 
-
     <h2>
-    🍅 Welcome to Plant AI
+    🍅 Ready for Analysis
     </h2>
 
 
     <p>
-    Upload a tomato leaf image to start analysis.
+    Upload a tomato leaf image and AI will detect
+    possible diseases with confidence score.
     </p>
 
 
@@ -882,8 +875,6 @@ else:
     """,
     unsafe_allow_html=True
     )
-
-
 
 st.divider()
 
