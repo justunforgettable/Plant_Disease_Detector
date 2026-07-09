@@ -7,7 +7,6 @@ import os
 import urllib.request
 import pandas as pd
 import plotly.express as px
-import time
 
 
 # ============================================================
@@ -22,119 +21,172 @@ st.set_page_config(
 
 
 # ============================================================
-# MODERN UI CSS
+# MODERN GLASS UI CSS
 # ============================================================
 
 st.markdown("""
 <style>
 
-/* Main background */
+
 .stApp {
-    background: linear-gradient(
-        135deg,
-        #fff0f6 0%,
-        #f0fff4 50%,
-        #e8f5e9 100%
-    );
-}
 
-
-/* Remove default padding */
-.block-container {
-    padding-top: 2rem;
-}
-
-
-/* Hero animation */
-.hero {
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,105,180,0.85),
-        rgba(46,125,50,0.85)
-    );
-
-    padding: 40px;
-
-    border-radius: 30px;
-
-    color:white;
-
-    text-align:center;
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,0.18);
-
-    animation:
-    fadeIn 1.5s ease-in-out;
+background:
+linear-gradient(
+135deg,
+#fff0f6,
+#f0fff4,
+#e8f5e9
+);
 
 }
 
 
-/* Glass cards */
+/* Header */
 
-.glass-card {
+.hero-small {
 
-    background:
-    rgba(255,255,255,0.35);
+background:
+linear-gradient(
+135deg,
+#ec407a,
+#43a047
+);
 
-    backdrop-filter:
-    blur(15px);
+padding:
+25px;
 
-    border-radius:
-    25px;
+border-radius:
+25px;
 
-    padding:
-    25px;
+color:white;
 
-    border:
-    1px solid rgba(255,255,255,0.5);
+text-align:center;
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.12);
+box-shadow:
+0 10px 30px rgba(0,0,0,0.15);
 
-}
-
-
-/* Feature cards */
-
-.feature-card {
-
-    background:
-    rgba(255,255,255,0.45);
-
-    backdrop-filter:
-    blur(10px);
-
-    padding:
-    18px;
-
-    border-radius:
-    20px;
-
-    text-align:center;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,0.1);
+animation:
+fadeIn 1s ease-in-out;
 
 }
 
 
-/* Upload box */
+/* Upload card */
 
 [data-testid="stFileUploader"] {
 
-    background:
-    rgba(255,255,255,0.45);
+background:
+rgba(255,255,255,0.45);
 
-    border-radius:
-    20px;
+border-radius:
+20px;
 
-    padding:
-    10px;
+padding:
+15px;
 
 }
+
+
+/* Result card */
+
+.result-card {
+
+background:
+rgba(255,255,255,0.55);
+
+backdrop-filter:
+blur(15px);
+
+border-radius:
+25px;
+
+padding:
+30px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.15);
+
+text-align:center;
+
+}
+
+
+/* Confidence */
+
+.confidence {
+
+font-size:
+45px;
+
+font-weight:
+800;
+
+color:
+#2e7d32;
+
+}
+
+
+/* Information cards */
+
+.info-text {
+
+
+background:
+rgba(255,255,255,0.55);
+
+
+backdrop-filter:
+blur(12px);
+
+
+border-radius:
+20px;
+
+
+padding:
+25px;
+
+
+font-size:
+19px;
+
+
+line-height:
+1.8;
+
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.10);
+
+
+}
+
+
+.info-text h3 {
+
+font-size:
+25px;
+
+color:
+#2e7d32;
+
+}
+
+
+
+/* Tabs */
+
+.stTabs [data-baseweb="tab"] {
+
+font-size:
+18px;
+
+font-weight:
+600;
+
+}
+
 
 
 /* Animation */
@@ -163,24 +215,10 @@ translateY(0);
 }
 
 
-/* Hide streamlit footer */
-
 footer {
+
 visibility:hidden;
-}
 
-/* Information section styling */
-
-.stTabs [data-baseweb="tab"] {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-
-.info-text {
-    font-size: 17px;
-    line-height: 1.7;
-    padding: 10px;
 }
 
 
@@ -200,19 +238,20 @@ with st.sidebar:
     st.title("🍅 Plant AI")
 
     st.write(
-    """
-    **Deep Learning Plant Disease Detector**
+"""
+### Deep Learning Plant Disease Detector
 
-    Dataset:
-    PlantVillage
+Dataset:
+PlantVillage
 
-    Model:
-    CNN
+Model:
+CNN
 
-    Framework:
-    TensorFlow
-    """
-    )
+Framework:
+TensorFlow + Streamlit
+"""
+)
+
 
 
 # ============================================================
@@ -229,19 +268,19 @@ HF_REPO = "Plant_Disease_Detector"
 
 
 MODEL_URL = (
-    f"https://huggingface.co/"
-    f"{HF_USERNAME}/"
-    f"{HF_REPO}/"
-    f"resolve/main/plant_disease_model.h5"
+f"https://huggingface.co/"
+f"{HF_USERNAME}/"
+f"{HF_REPO}/"
+f"resolve/main/plant_disease_model.h5"
 )
 
 
 
 CLASS_INDICES_URL = (
-    f"https://huggingface.co/"
-    f"{HF_USERNAME}/"
-    f"{HF_REPO}/"
-    f"resolve/main/class_indices.json"
+f"https://huggingface.co/"
+f"{HF_USERNAME}/"
+f"{HF_REPO}/"
+f"resolve/main/class_indices.json"
 )
 
 
@@ -253,9 +292,8 @@ CLASS_INDICES_PATH = "class_indices.json"
 
 
 # ============================================================
-# DOWNLOAD MODEL
+# DOWNLOAD FUNCTION
 # ============================================================
-
 
 def download_if_missing(url,path):
 
@@ -272,61 +310,174 @@ def download_if_missing(url,path):
 
 
 
-# -------------------------------
-# Disease Information
-# -------------------------------
-
-st.divider()
-
-
-tab1, tab2, tab3 = st.tabs(
-    [
-        "📖 Description",
-        "💊 Treatment",
-        "🛡 Prevention"
-    ]
-)
-
-
-with tab1:
-
-    st.markdown(
-        f"""
-        <div class="info-text">
-        <h3>📖 Disease Description</h3>
-        {info.get("description", "-")}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-with tab2:
-
-    st.markdown(
-        f"""
-        <div class="info-text">
-        <h3>💊 Recommended Treatment</h3>
-        {info.get("first_aid", "-")}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-with tab3:
-
-    st.markdown(
-        f"""
-        <div class="info-text">
-        <h3>🛡 Prevention Methods</h3>
-        {info.get("prevention", "-")}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 # ============================================================
-# LOAD MODEL + CLASS INDEX
+# DISEASE INFORMATION
+# ============================================================
+
+DISEASE_INFO = {
+
+
+"Tomato_healthy":
+{
+
+"display_name":
+"Healthy Tomato 🍃",
+
+"description":
+"The tomato plant appears healthy without visible symptoms of disease.",
+
+"first_aid":
+"No treatment required. Continue proper watering, sunlight and nutrition.",
+
+"prevention":
+"Maintain plant hygiene, proper irrigation and good air circulation.",
+
+"severity":
+"None"
+
+},
+
+
+
+"Tomato_Early_blight":
+{
+
+"display_name":
+"Early Blight 🍂",
+
+"description":
+"Fungal disease causing dark brown spots with yellow rings on tomato leaves.",
+
+"first_aid":
+"""
+• Remove infected leaves
+
+• Apply copper based fungicide
+
+• Avoid watering leaves directly
+""",
+
+"prevention":
+"""
+• Practice crop rotation
+
+• Maintain proper airflow
+
+• Use resistant varieties
+""",
+
+"severity":
+"Moderate"
+
+},
+
+
+
+"Tomato_Late_blight":
+{
+
+"display_name":
+"Late Blight ⚠️",
+
+"description":
+"Serious fungal disease causing water soaked lesions and rapid leaf damage.",
+
+"first_aid":
+"""
+• Remove infected plant parts
+
+• Apply recommended fungicide
+
+• Improve drainage
+""",
+
+"prevention":
+"""
+• Use healthy seeds
+
+• Avoid excess moisture
+
+• Maintain plant spacing
+""",
+
+"severity":
+"High"
+
+},
+
+
+
+"Tomato_Leaf_Mold":
+{
+
+"display_name":
+"Leaf Mold 🍃",
+
+"description":
+"Fungal infection usually occurring in humid conditions and affecting leaves.",
+
+"first_aid":
+"""
+• Remove affected leaves
+
+• Improve ventilation
+
+• Apply suitable fungicide
+""",
+
+"prevention":
+"""
+• Reduce humidity
+
+• Avoid overhead irrigation
+
+• Maintain spacing
+""",
+
+"severity":
+"Moderate"
+
+},
+
+
+
+"Tomato_Septoria_leaf_spot":
+{
+
+"display_name":
+"Septoria Leaf Spot 🍁",
+
+"description":
+"Small circular spots with dark borders appearing on tomato leaves.",
+
+"first_aid":
+"""
+• Remove infected leaves
+
+• Apply fungicide
+
+• Keep foliage dry
+""",
+
+"prevention":
+"""
+• Crop rotation
+
+• Proper irrigation
+
+• Avoid wet leaves
+""",
+
+"severity":
+"Moderate"
+
+}
+
+
+}
+
+# ============================================================
+# LOAD MODEL AND CLASS INDEX
 # ============================================================
 
 @st.cache_resource
@@ -348,11 +499,16 @@ def load_model_and_classes():
     )
 
 
-    with open(CLASS_INDICES_PATH,"r") as f:
+    with open(
+        CLASS_INDICES_PATH,
+        "r"
+    ) as f:
+
         index_to_class = json.load(f)
 
 
-    # Build model once
+    # Build model once (important for Keras)
+
     dummy = np.zeros(
         (1, IMG_SIZE, IMG_SIZE, 3),
         dtype=np.float32
@@ -361,26 +517,34 @@ def load_model_and_classes():
     model(dummy)
 
 
-    return model,index_to_class
+    return model, index_to_class
 
 
 
-model,index_to_class = load_model_and_classes()
+model, index_to_class = load_model_and_classes()
 
 
 
 class_names = [
+
     index_to_class[str(i)]
-    for i in range(len(index_to_class))
+
+    for i in range(
+        len(index_to_class)
+    )
+
 ]
 
 
 short_names = [
-    x.replace(
+
+    name.replace(
         "Tomato_",
         ""
     )
-    for x in class_names
+
+    for name in class_names
+
 ]
 
 
@@ -391,16 +555,19 @@ short_names = [
 
 def predict_disease(image):
 
+
     img = image.resize(
-        (IMG_SIZE,IMG_SIZE)
+        (IMG_SIZE, IMG_SIZE)
     )
 
 
     img_array = (
+
         np.array(img)
         .astype("float32")
         /
         255.0
+
     )
 
 
@@ -417,14 +584,20 @@ def predict_disease(image):
 
 
     index = int(
-        np.argmax(prediction[0])
+        np.argmax(
+            prediction[0]
+        )
     )
 
 
     confidence = (
-        float(prediction[0][index])
+
+        float(
+            prediction[0][index]
+        )
         *
         100
+
     )
 
 
@@ -434,102 +607,60 @@ def predict_disease(image):
 
 
     return (
+
         disease,
         confidence,
         prediction[0]
+
     )
 
+
+
 # ============================================================
-# COMPACT HEADER
+# HEADER
 # ============================================================
 
-st.markdown("""
+
+st.markdown(
+"""
 <div class="hero-small">
 
-<h1>🍅 Plant AI</h1>
+<h1>
+🍅 Plant AI
+</h1>
+
+
+<h3>
+Tomato Leaf Disease Detection System
+</h3>
+
 
 <p>
-Tomato Leaf Disease Detection using Deep Learning
+Powered by Deep Learning + CNN
 </p>
 
+
 </div>
+
 """,
-unsafe_allow_html=True)
+unsafe_allow_html=True
+)
 
-
-
-st.markdown("""
-<style>
-
-.hero-small {
-
-background:
-linear-gradient(
-135deg,
-#ec407a,
-#43a047
-);
-
-padding:20px;
-
-border-radius:20px;
-
-color:white;
-
-text-align:center;
-
-margin-bottom:25px;
-
-box-shadow:
-0 8px 25px rgba(0,0,0,0.15);
-
-}
-
-
-.result-card {
-
-background:
-rgba(255,255,255,0.55);
-
-backdrop-filter:
-blur(15px);
-
-padding:30px;
-
-border-radius:25px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.15);
-
-}
-
-
-.confidence {
-
-font-size:35px;
-
-font-weight:700;
-
-color:#2e7d32;
-
-}
-
-
-</style>
-""",
-unsafe_allow_html=True)
 
 
 # ============================================================
 # UPLOAD SECTION
 # ============================================================
 
-left,right = st.columns(
+
+left, right = st.columns(
     [1,1]
 )
 
 
+
 with left:
+
 
     st.subheader(
         "📤 Upload Tomato Leaf"
@@ -537,20 +668,27 @@ with left:
 
 
     uploaded_file = st.file_uploader(
-        "Choose image",
+
+        "Choose Image",
+
         type=[
             "jpg",
             "jpeg",
             "png"
-        ]
+        ],
+
+        help="Upload a clear tomato leaf image"
+
     )
 
 
 # ============================================================
-# RESULT SECTION
+# RESULT DISPLAY
 # ============================================================
 
+
 if uploaded_file:
+
 
     image = Image.open(
         uploaded_file
@@ -560,10 +698,15 @@ if uploaded_file:
     with left:
 
         st.image(
+
             image,
+
             caption="Uploaded Leaf",
+
             use_container_width=True
+
         )
+
 
 
     disease, confidence, probabilities = predict_disease(
@@ -577,35 +720,47 @@ if uploaded_file:
     )
 
 
+
     # -------------------------------
-    # Prediction Card
+    # Prediction Result Card
     # -------------------------------
+
 
     with right:
 
+
         st.markdown(
+
         f"""
+
         <div class="result-card">
 
-        <h2>
+
+        <h1>
         🩺 {info.get("display_name", disease)}
-        </h2>
+        </h1>
 
 
-        <p class="confidence">
+        <div class="confidence">
+
         {confidence:.2f}%
-        </p>
+
+        </div>
 
 
-        <h4>
-        Model Confidence
-        </h4>
+        <h3>
+        AI Confidence Score
+        </h3>
 
 
         </div>
+
         """,
+
         unsafe_allow_html=True
+
         )
+
 
 
         severity = info.get(
@@ -614,82 +769,154 @@ if uploaded_file:
         )
 
 
+
         if severity == "High":
 
+
             st.error(
-                "🚨 High Severity - Immediate Action Required"
+                "🚨 High Severity - Immediate Attention Required"
             )
+
 
         elif severity == "Moderate":
 
+
             st.warning(
-                "⚠️ Moderate Severity"
+                "⚠️ Moderate Severity Disease"
             )
+
 
         else:
 
+
             st.success(
-                "✅ Healthy Plant"
+                "✅ Plant is Healthy"
             )
 
 
 
-    # -------------------------------
-    # Disease Information
-    # -------------------------------
+
+    # ========================================================
+    # INFORMATION SECTION
+    # ========================================================
+
 
     st.divider()
 
 
     tab1, tab2, tab3 = st.tabs(
+
         [
+
             "📖 Description",
+
             "💊 Treatment",
+
             "🛡 Prevention"
+
         ]
+
     )
+
 
 
     with tab1:
 
-    st.markdown(
+
+        st.markdown(
+
         f"""
+
         <div class="info-text">
-        {info.get("description", "-")}
+
+        <h3>
+        📖 Disease Description
+        </h3>
+
+
+        {info.get(
+            "description",
+            "-"
+        )}
+
+
         </div>
+
         """,
+
         unsafe_allow_html=True
-    )
+
+        )
 
 
-with tab2:
 
-    st.markdown(
+
+    with tab2:
+
+
+        st.markdown(
+
         f"""
+
         <div class="info-text">
-        {info.get("first_aid", "-")}
+
+        <h3>
+        💊 Treatment / First Aid
+        </h3>
+
+
+        {info.get(
+            "first_aid",
+            "-"
+        )}
+
+
         </div>
+
         """,
+
         unsafe_allow_html=True
-    )
+
+        )
 
 
-with tab3:
 
-    st.markdown(
+
+    with tab3:
+
+
+        st.markdown(
+
         f"""
+
         <div class="info-text">
-        {info.get("prevention", "-")}
+
+        <h3>
+        🛡 Prevention Methods
+        </h3>
+
+
+        {info.get(
+            "prevention",
+            "-"
+        )}
+
+
         </div>
+
         """,
+
         unsafe_allow_html=True
-    )
+
+        )
 
 
 
-    # -------------------------------
-    # Confidence Chart
-    # -------------------------------
+
+    # ========================================================
+    # CONFIDENCE CHART
+    # ========================================================
+
 
     st.divider()
 
@@ -699,19 +926,33 @@ with tab3:
     )
 
 
+
     df = pd.DataFrame(
 
         {
-            "Disease": short_names,
 
-            "Confidence":
-            [
-                round(float(x)*100,2)
-                for x in probabilities
-            ]
+        "Disease":
+
+        short_names,
+
+
+        "Confidence":
+
+        [
+
+            round(
+                float(x)*100,
+                2
+            )
+
+            for x in probabilities
+
+        ]
+
         }
 
     )
+
 
 
     fig = px.bar(
@@ -726,9 +967,10 @@ with tab3:
 
         color="Confidence",
 
-        title="Model Confidence for Each Class"
+        title="Confidence Across Disease Classes"
 
     )
+
 
 
     fig.update_traces(
@@ -740,55 +982,101 @@ with tab3:
     )
 
 
+
     fig.update_layout(
+
+        height=450,
 
         yaxis_title="Confidence (%)",
 
-        xaxis_title="Disease Classes",
-
-        height=450
+        xaxis_title="Disease"
 
     )
+
 
 
     st.plotly_chart(
+
         fig,
+
         use_container_width=True
+
     )
+
+
+
+# ============================================================
+# LANDING PAGE
+# ============================================================
 
 
 else:
 
+
     st.markdown(
+
     """
+
     <div class="glass-card"
     style="text-align:center">
+
 
     <h2>
     🍅 Ready for Analysis
     </h2>
 
 
-    <p>
-    Upload a tomato leaf image and AI will detect
-    possible diseases with confidence score.
+    <p style="font-size:18px;">
+
+    Upload a tomato leaf image and AI will
+    identify possible diseases.
+
     </p>
 
 
+    <p style="font-size:16px;">
+
+    🧠 CNN Prediction
+    |
+    📊 Confidence Score
+    |
+    💊 Treatment Guidance
+
+    </p>
+
+
+    <br>
+
+
     <p>
-    Supported formats:
+
+    Supported Formats:
     JPG • JPEG • PNG
+
     </p>
 
 
     </div>
+
+
     """,
+
     unsafe_allow_html=True
+
     )
+
+
+
+# ============================================================
+# FOOTER
+# ============================================================
+
 
 st.divider()
 
 
 st.caption(
-    "Built with TensorFlow + Streamlit | PlantVillage Dataset"
+
+"Built with TensorFlow + Streamlit | PlantVillage Dataset"
+
 )
