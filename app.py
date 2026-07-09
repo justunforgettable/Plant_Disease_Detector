@@ -1,4 +1,3 @@
-
 import streamlit as st
 import numpy as np
 import tensorflow as tf
@@ -450,4 +449,3 @@ st.caption(
     "Built with TensorFlow + Streamlit | "
     "CNN trained on PlantVillage Dataset"
 )
-```
