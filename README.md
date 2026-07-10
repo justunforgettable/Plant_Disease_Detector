@@ -45,7 +45,7 @@ Python · TensorFlow · Keras · Streamlit · Pandas · Plotly · Pillow · NumP
 ## ⚙️ Run Locally
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/Plant_Disease_Detector.git
+git clone [(https://github.com/justunforgettable/Plant_Disease_Detector.git)]
 cd Plant_Disease_Detector
 pip install -r requirements.txt
 streamlit run app.py
@@ -63,7 +63,6 @@ Model files download automatically from Hugging Face on first run.
 ## 👨‍💻 Author
 
 **Nahid Kausar** — B.Tech CSE
-GitHub: [YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME)
 
 ---
 
