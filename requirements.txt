@@ -1,7 +1,8 @@
-streamlit
+streamlit==1.38.0
 tensorflow-cpu==2.16.1
 numpy==1.26.4
-pandas
-plotly
-pillow
-h5py
+h5py==3.11.0
+protobuf==4.25.3
+pandas==2.2.2
+plotly==5.24.1
+Pillow==10.4.0
