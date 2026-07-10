@@ -505,7 +505,7 @@ def load_model_and_classes():
     model = keras.models.load_model(
     MODEL_PATH,
     compile=False
-    )
+)
 
     with open(
         CLASS_INDICES_PATH,
@@ -708,10 +708,8 @@ if uploaded_file:
         st.image(
 
             image,
-
             caption="Uploaded Leaf",
-
-            use_container_width=True
+            width="stretch"
 
         )
 
