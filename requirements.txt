@@ -1,7 +1,7 @@
 streamlit
-tensorflow
-numpy
-pillow
+tensorflow-cpu==2.16.1
+numpy==1.26.4
 pandas
 plotly
-opencv-python-headless
+pillow
+h5py
