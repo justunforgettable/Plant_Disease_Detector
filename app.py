@@ -285,21 +285,11 @@ HF_REPO = "Plant_Disease_Detector"
 
 
 
-MODEL_URL = (
-f"https://huggingface.co/"
-f"{HF_USERNAME}/"
-f"{HF_REPO}/"
-f"resolve/main/plant_disease_model.h5"
-)
+MODEL_URL = ("https://huggingface.co/justunforgettable/Plant_Disease_Detector/resolve/main/plant_disease_model.h5")
 
 
 
-CLASS_INDICES_URL = (
-f"https://huggingface.co/"
-f"{HF_USERNAME}/"
-f"{HF_REPO}/"
-f"resolve/main/class_indices.json"
-)
+CLASS_INDICES_URL = ("https://huggingface.co/justunforgettable/Plant_Disease_Detector/resolve/main/class_indices.json")
 
 
 
