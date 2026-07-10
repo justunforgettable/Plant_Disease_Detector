@@ -4,11 +4,6 @@
 # ============================================================
 
 
-# ============================================================
-# TensorFlow Stability Settings
-# MUST BE BEFORE TENSORFLOW IMPORT
-# ============================================================
-
 import os
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
@@ -596,23 +591,16 @@ DISEASE_INFO = {
 # TEXT FORMATTER FOR HTML
 # ============================================================
 
-
 def clean_text(text):
 
+    if text is None:
+        return ""
 
-    return text.replace(
-
-        "\n",
-
-        "<br>"
-
+    return (
+        text
+        .replace("\n\n", "<br><br>")
+        .replace("\n", "<br>")
     )
-
-
-
-
-
-
 
 # ============================================================
 # LOAD MODEL AND CLASSES
@@ -1179,92 +1167,51 @@ if uploaded_file:
 
 
 
-    with tab2:
+with tab2:
 
+    treatment = clean_text(
+        info.get("first_aid", "-")
+    )
 
-        st.markdown(
-
+    st.markdown(
         f"""
-
         <div class="info-text">
 
+        <h3>💊 Treatment / First Aid</h3>
 
-        <h3>
-
-        💊 Treatment / First Aid
-
-        </h3>
-
-
-
-        {clean_text(
-
-            info.get(
-
-                "first_aid",
-
-                "-"
-
-            )
-
-        )}
-
-
+        <p>
+        {treatment}
+        </p>
 
         </div>
-
-
         """,
-
         unsafe_allow_html=True
-
-        )
-
+    )
 
 
 
 
 
-    with tab3:
+with tab3:
 
+    prevention = clean_text(
+        info.get("prevention", "-")
+    )
 
-        st.markdown(
-
+    st.markdown(
         f"""
-
         <div class="info-text">
 
+        <h3>🛡 Prevention Methods</h3>
 
-        <h3>
-
-        🛡 Prevention Methods
-
-        </h3>
-
-
-
-        {clean_text(
-
-            info.get(
-
-                "prevention",
-
-                "-"
-
-            )
-
-        )}
-
-
+        <p>
+        {prevention}
+        </p>
 
         </div>
-
-
         """,
-
         unsafe_allow_html=True
-
-        )
+    )
 
 
 
