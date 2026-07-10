@@ -42,16 +42,6 @@ Grad-CAM implemented in the training notebook (`conv2d_2` layer, `GradientTape`-
 
 Python · TensorFlow · Keras · Streamlit · Pandas · Plotly · Pillow · NumPy · Hugging Face Hub
 
-## ⚙️ Run Locally
-
-```bash
-git clone [(https://github.com/justunforgettable/Plant_Disease_Detector.git)]
-cd Plant_Disease_Detector
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-Model files download automatically from Hugging Face on first run.
 
 ## 🔮 Future Enhancements
 
