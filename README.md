@@ -1,31 +1,70 @@
-# Plant Disease Detection using CNN
+# 🍅 Plant AI — Tomato Leaf Disease Detection System
 
-This project uses a Convolutional Neural Network (CNN) to detect diseases in tomato leaves.
+<div align="center">
 
-## Features
+Deep learning web app that detects tomato leaf diseases from images and gives confidence scores, treatment tips, and prevention guidance.
 
-- Upload leaf image
-- Disease prediction
-- Confidence score
-- Severity information
-- Treatment suggestions
-- Prevention methods
+🚀 **Live Demo:** https://plantdiseasedetector-92zkewmvliwudz7jmy3uwp.streamlit.app/
 
-## Technologies Used
+</div>
 
-- Python
-- TensorFlow
-- Streamlit
-- NumPy
-- PIL
+---
 
-## Run Locally
-## Model file is not included due to GitHub file size limitations.
+## 📌 Overview
 
-still working on ui
+A custom CNN trained on a 5-class subset of the PlantVillage dataset, served via a Streamlit app. The model is hosted on the **Hugging Face Hub** and downloaded at runtime (the `.h5` file is ~97 MB, too large for GitHub).
 
+## ✨ Features
+
+- Upload a tomato leaf image → get predicted disease + confidence %
+- Disease description, severity, first-aid, and prevention info
+- Interactive confidence chart across all 5 classes (Plotly)
+- Custom pastel-themed Streamlit UI
+
+## 📂 Dataset & Classes
+
+Subset of [PlantVillage](https://www.kaggle.com/datasets/emmarex/plantdisease) — 5 tomato classes: **Healthy, Early Blight, Late Blight, Leaf Mold, Septoria Leaf Spot** (5,776 train / 1,447 val images, 80/20 split).
+
+## 🏗️ Model
+
+Custom CNN (3× Conv2D + BatchNorm + MaxPooling blocks → Dense(256) → Dropout) — 128×128×3 input, ~8.48M parameters, TensorFlow/Keras.
+
+| Metric | Score |
+|--------|-------|
+| Validation Accuracy | **76.2%** |
+| Validation Loss | 0.816 |
+
+## 🔍 Explainability
+
+Grad-CAM implemented in the training notebook (`conv2d_2` layer, `GradientTape`-based due to the `Sequential` wrapper blocking standard access) — not yet integrated into the deployed app.
+
+## 🛠️ Tech Stack
+
+Python · TensorFlow · Keras · Streamlit · Pandas · Plotly · Pillow · NumPy · Hugging Face Hub
+
+## ⚙️ Run Locally
 
 ```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/Plant_Disease_Detector.git
+cd Plant_Disease_Detector
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+Model files download automatically from Hugging Face on first run.
+
+## 🔮 Future Enhancements
+
+- Integrate Grad-CAM into the live app
+- Real-time camera detection
+- Support for more crops
+- Mobile app version
+
+## 👨‍💻 Author
+
+**Nahid Kausar** — B.Tech CSE
+GitHub: [YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME)
+
+---
+
+<div align="center">⭐ Star this repo if it helped you!</div>
