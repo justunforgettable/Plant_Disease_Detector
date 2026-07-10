@@ -1100,7 +1100,7 @@ if uploaded_file:
 
 
 
-    # ========================================================
+       # ========================================================
     # INFORMATION TABS
     # ========================================================
 
@@ -1112,51 +1112,36 @@ if uploaded_file:
     tab1, tab2, tab3 = st.tabs(
 
         [
-
             "📖 Description",
-
             "💊 Treatment",
-
             "🛡 Prevention"
-
         ]
 
     )
 
 
 
-
-
     with tab1:
+
+
+        description = info.get(
+            "description",
+            "-"
+        )
 
 
         st.markdown(
 
         f"""
-
         <div class="info-text">
 
+        <h3>📖 Disease Description</h3>
 
-        <h3>
-
-        📖 Disease Description
-
-        </h3>
-
-
-
-        {info.get(
-
-            "description",
-
-            "-"
-
-        )}
-
-
+        <p>
+        {description}
+        </p>
 
         </div>
-
         """,
 
         unsafe_allow_html=True
@@ -1166,14 +1151,21 @@ if uploaded_file:
 
 
 
+    with tab2:
 
-with tab2:
 
-    treatment = clean_text(
-        info.get("first_aid", "-")
-    )
+        treatment = clean_text(
 
-    st.markdown(
+            info.get(
+                "first_aid",
+                "-"
+            )
+
+        )
+
+
+        st.markdown(
+
         f"""
         <div class="info-text">
 
@@ -1185,20 +1177,29 @@ with tab2:
 
         </div>
         """,
+
         unsafe_allow_html=True
-    )
+
+        )
 
 
 
 
+    with tab3:
 
-with tab3:
 
-    prevention = clean_text(
-        info.get("prevention", "-")
-    )
+        prevention = clean_text(
 
-    st.markdown(
+            info.get(
+                "prevention",
+                "-"
+            )
+
+        )
+
+
+        st.markdown(
+
         f"""
         <div class="info-text">
 
@@ -1210,15 +1211,10 @@ with tab3:
 
         </div>
         """,
+
         unsafe_allow_html=True
-    )
 
-
-
-
-
-
-
+        )
     # ========================================================
     # PROBABILITY CHART
     # ========================================================
