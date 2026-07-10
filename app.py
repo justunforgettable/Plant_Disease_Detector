@@ -491,39 +491,17 @@ DISEASE_INFO = {
 @st.cache_resource
 def load_model_and_classes():
 
-    download_if_missing(
-        MODEL_URL,
-        MODEL_PATH
-    )
+    download_if_missing(MODEL_URL, MODEL_PATH)
+    download_if_missing(CLASS_INDICES_URL, CLASS_INDICES_PATH)
 
-    download_if_missing(
-        CLASS_INDICES_URL,
-        CLASS_INDICES_PATH
-    )
-
-
+    # Load model without compiling
     model = keras.models.load_model(
-    MODEL_PATH,
-    compile=False
-)
-
-    with open(
-        CLASS_INDICES_PATH,
-        "r"
-    ) as f:
-
-        index_to_class = json.load(f)
-
-
-    # Build model once (important for Keras)
-
-    dummy = np.zeros(
-        (1, IMG_SIZE, IMG_SIZE, 3),
-        dtype=np.float32
+        MODEL_PATH,
+        compile=False
     )
 
-    model(dummy)
-
+    with open(CLASS_INDICES_PATH, "r") as f:
+        index_to_class = json.load(f)
 
     return model, index_to_class
 
@@ -706,11 +684,10 @@ if uploaded_file:
     with left:
 
         st.image(
-
+            
             image,
             caption="Uploaded Leaf",
-            width="stretch"
-
+            use_container_width=True
         )
 
 
@@ -1005,7 +982,7 @@ if uploaded_file:
 
         fig,
 
-        use_container_width=True
+        width="stretch"
 
     )
 
