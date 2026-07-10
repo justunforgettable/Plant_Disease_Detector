@@ -116,7 +116,7 @@ text-align:center;
 .confidence {
 
 font-size:
-45px;
+38px;
 
 font-weight:
 800;
@@ -214,6 +214,24 @@ translateY(0);
 
 }
 
+.glass-card {
+
+background:
+rgba(255,255,255,0.45);
+
+backdrop-filter:
+blur(15px);
+
+border-radius:
+25px;
+
+padding:
+30px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.12);
+
+}
 
 footer {
 
