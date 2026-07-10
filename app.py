@@ -503,9 +503,9 @@ def load_model_and_classes():
 
 
     model = keras.models.load_model(
-        MODEL_PATH
+    MODEL_PATH,
+    compile=False
     )
-
 
     with open(
         CLASS_INDICES_PATH,
