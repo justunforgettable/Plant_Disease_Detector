@@ -187,7 +187,7 @@ box-shadow:
 .result-card h2 {
 
 
-font-size:28px;
+font-size:35px;
 
 
 color:#2e7d32;
